@@ -1,5 +1,6 @@
 import Data from  '../data.json'
-import {useState,useEffect} from 'react'
+import {useState,useEffect,useRef} from 'react'
+import Title from './title'
 
 function Destination() {
   const{destinations} = Data
@@ -10,75 +11,81 @@ function Destination() {
   const upperDistance = distance.toUpperCase()
   const upperTravel = travel.toUpperCase()
   const list = ['MOON','MARS','EUROPA','TITAN']
+  const [selected, setSelected] = useState(0)
 
   useEffect(()=>{
     setImage(images.png)
   },[destination])
 
   const chooseDestination = (index) => {
+    console.log('clicked')
     setDestination(index)
+    setSelected(index)
   }
 
   return (
-    <div className='flex text-white  flex-col items-center bg-no-repeat bg-cover bg-destinationmobile w-[100%] h-[850px] pt-[70px] 
-    md:h-[1024px]
-    lg:h-[900px] lg:pt-[110px]'>
-      <div className="h-[50px] w-[100%] flex justify-between px-[80px] text-white items-center 
-        md:justify-start md:mt-[50px] md:px-[40px] md:text-[20px] md:tracking-[3.38px]
-        lg:px-[190px]"> 
-        <div className="font-barlow text-grey flex items-center justify-center md:text-[20px] md:mr-[20px]">01</div>
-        <div className="font-barlow tracking-[2.7px] text-[16px] flex items-center justify-center md:text-[20px]">PICK YOUR DESTINATION</div>
+   <div className='w-full pb-[100px] destination bg-destinationmobile bg-cover flex-col flex min-h-[950px]
+    sm:h-full
+    md:px-[50px]
+    lg:min-h-0 h-full lg:pb-0
+    lg2:min-h-[580px]'>
+    <Title num="01" text="PICK YOUR DESTINATION"/>
+
+    <div className='flex  w-full flex-1 flex-col items-center px-[20px] gap-[50px]
+      md:px-[80px]
+      lg:flex-row lg:px-[50px] lg:justify-center
+      lg2:px-[100px] lg2:gap-[100px]'>
+
+      <div className='globe infinite h-[170px] w-[170px] mt-[20px]
+        sm:w-auto sm:h-[300px]
+        md:w-[300px] md:h-[300px]
+        lg:w-[350px] lg:h-[350px]
+        lg2:w-[280px] lg2:h-[280px]'>
+        <img className= 'w-full h-full' src={image} alt="destination_image" />
       </div>
 
-      <div className='flex-col flex items-center
-        lg:flex-row lg:justify-between lg:w-[70%] '>
-        <div className=' w-[170px] my-[20px] h-[170px] 
-          md:h-[300px] md:w-[300px] mt-[50px]
-          lg:w-[445px] lg:h-[445px]'>
-          <img className='w-[100%] h-[100%]' src = {image} alt="moon_image" />
+      <div className='w-full flex flex-1 gap-[30px] flex-col justify-between
+        lg:pb-[0px] lg:gap-[10px]'>
+        <ul className='flex w-full h-auto justify-center gap-[30px]
+        lg:justify-start'>
+          {
+            list.map((list,index) => 
+              <li key= {index} onClick={()=>{chooseDestination(index)}} className={` ${selected === index? 'border-b-[3px]' :'border-b-[0px]'} text-[15px] cursor-pointer text-white border-b-[white]
+              md:text-[16px]
+              lg:text-[15px]`}>{list}</li>
+            )
+          }
+        </ul>
+        <div className='w-full h-auto flex justify-center text-center text-[56px] font-bellefair text-[white]
+          md:text-[80px]
+          lg:text-left lg:justify-start lg:text-[70px]'>{upperName}</div>
+        <div className='w-full h-auto text-center font-barlow2 text-[15px] leading-[25px] text-[white]
+          sm:text-[16px]
+          md:text-[16px] leading-[28px]
+          lg:text-left lg:text-[15px]'>
+          {description}
         </div>
-        <div className='flex flex-col items-center 
-          lg:w-[445px] lg:h-[472px] lg:items-start lg:py-[20px] '>
-          <nav className='w-full h-[33px] px-[70px] 
-            md:px-[250px]
-            lg:px-[0px]'>
-            <ul className=' w-full h-full flex text-[14px] font-barlow tracking-[2.7px] justify-between text-white 
-              md:mt-[40px] md:tracking-[2.7px] md:text-[16px]
-              lg:w-[285.5px] lg:h-[34px] lg:mt-[0px]'>
-              {
-                list.map((list,index)=>
-                  <li onClick={()=>{chooseDestination(index)}} key = {index} className='hover:border-b-[4px] text-grey border-white-600'>{list}</li>
-                )
-              }
-            </ul>
-          </nav>
 
-          <h1 className="h-[70px] font-bellefair w-full text-[56px] mt-[10px] text-center 
-            md:mt-[63px] md:text-[80px] 
-            lg:text-left lg:mt-[20px]">{upperName}</h1>
-          <p className='text-center h-[158px] leading-[25px] font-barlow2 text-[15px] w-[90%] px-[15px] text-grey border-b-[1px] mt-[5px] border-grey 
-            md:mt-[50px] md:w-[70%] md:text-[16px] md:h-[200px]
-            lg:w-full lg:text-left lg:px-[0px] lg:border-b-[0px]'>{description}</p>
-
-          <div className='md:flex 
-            lg:flex-row lg:w-full'>
-            <div className="lg:w-[50%] lg:h-full">
-              <div className=" w-full flex justify-center font-barlow text-grey text-[14px] mt-[30px] tracking-[2.36px]
-                lg:justify-start">AVG. DISTANCE</div>
-              <div className="text-white flex justify-center mt-[5px] font-bellefair text-[28px] 
-                lg:justify-start">{upperDistance}</div>
-            </div>
-            <div className=" lg:w-[50%]">
-              <div className="tracking-[2.36px] text-grey font-barlow flex justify-center text-[14px] mt-[25px]
-              lg:justify-start">EST. TRAVEL TIME</div>
-              <div className="text-[28px] font-bellefair flex justify-center mt-[5px] 
-              lg:justify-start">{upperTravel}</div>
-            </div>
+        <div className=' p-[20px] w-full flex gap-[10px] flex-col border-t-[solid] border-t-[1px] border-t-[#ffffff40]
+        sm:flex-row 
+        lg:p-[0px] lg2:pt-[20px]'>
+          <div className='w-full'>
+            <div className='text-center text-[white] 
+              lg:text-left'>AVG. DISTANCE</div>
+            <div className='font-bellefair text-[28px] text-[white] text-center
+              lg:text-left'>{upperDistance}</div>
           </div>
-
+          <div className='w-full'>
+            <div className='text-center text-[white] 
+              lg:text-left'>EST. TRAVEL TIME</div>
+            <div className='font-bellefair text-[28px] text-[white] text-center 
+              lg:text-left'>{upperTravel}</div>
+          </div>
         </div>
       </div>
+
     </div>
+   </div>
   )
 }
 

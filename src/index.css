@@ -1,3 +1,16 @@
 @import "tailwindcss/base";
 @import "tailwindcss/utilities";
 @import "tailwindcss/components";
+
+.globe{
+    animation: spin 20s linear infinite;
+}
+
+@keyframes spin{
+    0%{
+        transform:rotateZ(0deg);
+    }
+    100%{
+        transform:rotateZ(360deg);
+    }
+}

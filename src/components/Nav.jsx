@@ -4,6 +4,21 @@ import Hamburger from "../assets/shared/icon-hamburger.svg"
 import { Link } from 'react-router-dom'
 
 function Nav({setMenuDown,menuDown}) {
+  const [color,setColor] = useState('colorless')
+  const [selected, setSelected] = useState(1)
+
+  const selectNav = (id) =>{
+    setSelected(id)
+  }
+  
+  onscroll = () =>{
+    if(scrollY > 0){
+      setColor('colored')
+    }else{
+      setColor('colorless')
+    }
+  }
+  
   const links = [{
     num: '00',
     title:'HOME',
@@ -35,25 +50,27 @@ function Nav({setMenuDown,menuDown}) {
   }
 
   return (
-    <div className='nav w-full h-[88px] fixed top-[0px]
-    flex justify-between p-[24px] items-center md:p-[0px] md:pl-[39px] md:h-[96px] 
-    lg:pl-[55px] lg:pt-[35px] lg-pr-[0px]'>
-      <div className="logo w-[40px] h-[40px] md:h-[48px] md:w-[48px]">
+    <div className={`${color == "colored"? "bg-[#110f13ee]" : "bg-[transparent]"} m-auto nav z-[20] w-full h-[88px] max-w-[1500px] fixed top-[0px] flex justify-between items-center px-[10px]
+      md:p-[10px] md:pl-[39px] md:h-[96px] 
+      lg:h-[50px]
+      xl:pl-[55px]  xl-pr-[0px]`}>
+        
+      <div className="logo w-[40px] h-[40px]">
         <img className='w-[100%] block h-[100%]' src= {Logo} alt="My logo" />
       </div>
       <button onClick={setMenuState} className="hamburger w-[24px] h-[21px] block md:hidden">
-        <img className='w-[100%] pointer-events-none h-[100%]' src= {Hamburger} alt="My logo" />
+        <img className='w-full pointer-events-none h-[100%]' src= {Hamburger} alt="My logo" />
       </button>
       <div className="navlist w-[450px] h-full bg-[#ffffff0e] hidden 
       md:flex
-      lg:w-[830px] lg:h-[96px]">
-        <ul className=' ul w-full h-full justify-between flex px-[50px]
+      lg:w-[830px]">
+        <ul className='ul w-full h-full justify-between flex px-[50px]
         lg:px-[150px]'>
             {
               links.map(link=>
-                <Link key={link.id} to ={link.page}>
-                  <li className='w-auto h-[100%] text-white font-barlow flex items-center text-[14px] tracking-[2.36px] border-white hover:border-b-[2px]
-                    lg:text-[16px]'>
+                <Link key={link.id} to={link.page} onClick={()=>{selectNav(link.id)}}>
+                  <li className={`${link.id === selected? "border-b-[2px] border-white":"border-[transparent]"} w-auto h-[100%] text-white font-barlow flex justify-center items-center text-[14px] tracking-[2.36px] hover:border-[#FFFFFF20] hover:border-b-[2px]
+                    xl:text-[16px]`}>
                       {link.title}
                   </li>
                 </Link>)

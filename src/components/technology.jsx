@@ -1,5 +1,6 @@
 import Data from  '../data.json'
 import {useState,useEffect} from 'react'
+import Title from './title'
 
 function Technology() {
     const{technology} = Data
@@ -19,27 +20,54 @@ function Technology() {
     }
 
   return (
-   <div className='flex text-white  flex-col items-center bg-no-repeat bg-cover bg-crewmobile w-[100%] h-[100vh] pt-[70px]'>
-      <div className="h-[50px] w-[100%] flex justify-between px-[80px] text-white items-center md:justify-start md:mt-[50px] md:px-[40px] md:text-[20px] md:tracking-[3.38px]"> 
-        <div className="font-barlow text-grey flex items-center justify-center md:text-[20px] md:mr-[20px]">03</div>
-        <div className="font-barlow tracking-[2.7px] text-[16px] flex items-center justify-center md:text-[20px]">SPACE LAUNCH 101</div>
-      </div>
-      <div className=' w-full my-[20px] h-[170px] border-b-2 border-white-600 md:mt-[50px] md:h-[310px]'>
-        <img className='w-[100%] h-[100%]' src = {image} alt="crew_member"/>
-      </div>
+   <div className='h-full min-h-[730px] flex text-white flex-col items-center bg-no-repeat bg-cover bg-crewmobile w-full pb-[50px]
+    sm:min-h-[800px]
+    md:px-[50px]
+    lg:min-h-0
+    lg2:min-h-[580px]'>
+    
+     <Title num="03" text="SPACE LAUNCH 101"/>
 
-      <div className=" w-full h-[20px] flex justify-between px-[110px] md:mt-[20px] md:w-[210px] md:p-[0px]">
-        {
-          btns.map((btn,index)=>
-          index === tech?
-          <button key={index} onClick={()=>{selectTechnology(index)}} className='text-black bg-white w-[40px] h-[40px] mt-[14px] text-[16px] font-bellefair rounded-[50%] md:h-[60px] md:w-[60px] md:text-[24px]'>{btn}</button>:
-          <button key={index} onClick={()=>{selectTechnology(index)}} className='text-white border-white border-[1px] bg-transparent w-[40px] h-[40px] mt-[14px] text-[16px] font-bellefair rounded-[50%] md:h-[60px] md:w-[60px] md:text-[24px]'>{btn}</button>
-          )
-        }
+      <div className='lg:w-full lg:h-full  lg:gap-[10px] lg:flex lg:flex-row-reverse lg:items-center'>
+
+        {/* image */}
+        <div className=' w-full my-[20px] h-[170px] border-b-2 border-white-600 md:mt-[50px] 
+          sm:h-[300px]
+          md:h-[310px]
+          lg:w-[50%]'>
+          <img className='w-[100%] h-full' src = {image} alt="crew_member"/>
+        </div>
+        <div className='lg:w-1/2 lg:flex'>
+
+          {/* nav */}
+          <div className=" w-full h-[20px] flex justify-center gap-[30px]
+            md:mt-[20px] 
+            lg:w-[120px] lg:flex-col lg:h-full lg:px-[0px] lg:justify-center">
+            {
+              btns.map((btn,index)=>
+              index === tech?
+              <button key={index} onClick={()=>{selectTechnology(index)}} className='text-[black] bg-white w-[40px] h-[40px] mt-[14px] text-[16px] font-bellefair rounded-[50%] md:h-[60px] md:w-[60px] md:text-[24px]'>{btn}</button>:
+              <button key={index} onClick={()=>{selectTechnology(index)}} className='text-white border-white border-[1px] bg-transparent w-[40px] h-[40px] mt-[14px] text-[16px] font-bellefair rounded-[50%] md:h-[60px] md:w-[60px] md:text-[24px]'>{btn}</button>
+              )
+            }
+          </div>
+
+          {/* details */}
+          <div className='w-full flex justify-center flex-col items-center'>
+            <div className='mt-[55px] font-barlow text-[14px] text-center tracking-[2.36px] 
+              sm:text-[20px]
+              md:mt-[100px]
+              lg:text-left lg:w-full lg:mt-[0px]'>THE TERMINOLOGY...</div>
+            <div className="font-bellefair text-[24px] mt-[5px] text-center 
+              sm:text-[30px]
+              md:text-[40px]
+              lg:text-left lg:w-full lg:text-[32px]">{upperName}</div>
+            <p className='w-full px-[28px] tracking-[0px] text-center text-grey mt-[15px] font-barlow leading-[25px] 
+              md:text-[16px] md:tracking-[28] md:w-[80%]
+              lg:text-left lg:w-full lg:p-[0px] lg:pr-[10px] lg:text-[18px]'>{description}</p>
+          </div>
+        </div>
       </div>
-      <div className='mt-[55px] font-barlow text-[14px] tracking-[2.36px] md:text-[16px] md:mt-[100px]'>THE TERMINOLOGY...</div>
-      <div className="font-bellefair text-[24px] mt-[5px] md:text-[40px]">{upperName}</div>
-      <p className='w-full px-[28px] tracking-[0px] text-center text-grey mt-[15px] font-barlow leading-[25px] md:text-[16px] md:tracking-[28] md:w-[80%]'>{description}</p>
    </div>
   )
 }

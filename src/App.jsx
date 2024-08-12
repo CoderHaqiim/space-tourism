@@ -14,16 +14,19 @@ function App() {
   const[menuDown,setMenuDown] = useState(false)
 
   return (  
-    <>
-    <Nav setMenuDown = {setMenuDown} menuDown ={menuDown}/>
-    <Menubar menuDown = {menuDown} setMenuDown = {setMenuDown}/>
-    <Routes>
-      <Route path='/' element={<Home/>}/>
-      <Route path='/destination' element={<Destination/>}/>
-      <Route path='/crew' element={<Crew/>}/>
-      <Route path='/technology' element={<Technology/>}/>
-    </Routes>
-    </>
+    <div className="w-full h-[100vh] max-h-[950px] flex justify-center
+    lg2:max-h-[900px]" >
+      <div className='w-full h-full max-w-[1500px]'>
+        <Nav setMenuDown = {setMenuDown} menuDown ={menuDown}/>
+        <Menubar menuDown = {menuDown} setMenuDown = {setMenuDown}/>
+        <Routes>
+          <Route path='/' element={<Home/>}/>
+          <Route path='/destination' element={<Destination/>}/>
+          <Route path='/crew' element={<Crew/>}/>
+          <Route path='/technology' element={<Technology/>}/>
+        </Routes>
+      </div>
+    </div>
   
   )
 }

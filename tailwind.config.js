@@ -14,7 +14,7 @@ export default {
       'xl':'1300px'
     },
     backgroundImage:{
-      'mobilehome':"url('./assets/home/background-home-mobile.jpg')",
+      'mobilehome':"url('/assets/home/background-home-mobile.jpg')",
       'destinationmobile':"url('/assets/destination/background-destination-mobile.jpg')",
       'destinationtab':"url('/assets/destination/background-destination-tablet.jpg')",
       'crewmobile': "url('/assets/crew/background-crew-mobile.jpg')",
